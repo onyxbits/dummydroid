@@ -62,6 +62,7 @@ public class CheckinForm extends AbstractForm {
 	public void finished(Exception e) {
 		result.setText(e.getMessage());
 		progress.setVisible(false);
+		cached=null;
 	}
 
 	public void finished(String gsf) {
