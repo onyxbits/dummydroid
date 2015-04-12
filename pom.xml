@@ -7,7 +7,7 @@
 	<version>1.0</version>
 	<packaging>jar</packaging>
 
-	<name>Dummy Droid</name>
+	<name>DummyDroid</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -56,7 +56,8 @@
 
 	</dependencies>
 	<build>
-		<finalName>DummyDroid</finalName>
+		<finalName>${project.name}-${project.version}</finalName>
+
 		<plugins>
 
 			<!-- download source code in Eclipse, best practice -->
@@ -97,7 +98,7 @@
 							<mainClass>de.onyxbits.dummydroid.App</mainClass>
 						</manifest>
 					</archive>
-
+					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
 					<execution>
