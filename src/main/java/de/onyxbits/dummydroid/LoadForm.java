@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Arrays;
 import java.util.Properties;
 
 import javax.swing.JFileChooser;
@@ -66,6 +67,29 @@ public class LoadForm extends AbstractForm implements ActionListener, DummyDroid
 		formData.getAndroidCheckinRequestBuilder().setLocale(
 				properties.getProperty("ro.product.locale.language", "") + "_"
 						+ properties.getProperty("ro.product.locale.region", ""));
+
+		if (properties.get(FEATURES) != null) {
+			formData
+					.getDeviceConfigurationProtoBuilder()
+					.clearSystemAvailableFeature()
+					.addAllSystemAvailableFeature(
+							Arrays.asList(properties.getProperty(FEATURES, "").trim().split(", *")));
+		}
+
+		if (properties.get(LIBRARIES) != null) {
+			formData
+					.getDeviceConfigurationProtoBuilder()
+					.clearSystemSharedLibrary()
+					.addAllSystemSharedLibrary(
+							Arrays.asList(properties.getProperty(LIBRARIES, "").trim().split(", *")));
+		}
+		if (properties.get(PLATFORMS) != null) {
+			formData
+					.getDeviceConfigurationProtoBuilder()
+					.clearNativePlatform()
+					.addAllNativePlatform(
+							Arrays.asList(properties.getProperty(PLATFORMS, "").trim().split(", *")));
+		}
 
 	}
 

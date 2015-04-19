@@ -14,4 +14,7 @@ public interface DummyDroidProperties {
 	public static final String TIMEZONE = "dd.timezone";
 	public static final String CELLOPERATOR = "dd.celloperator";
 	public static final String SIMOPERATOR = "dd.simoperator";
+	public static final String FEATURES = "dd.features";
+	public static final String LIBRARIES = "dd.libraries";
+	public static final String PLATFORMS = "dd.native";
 }
