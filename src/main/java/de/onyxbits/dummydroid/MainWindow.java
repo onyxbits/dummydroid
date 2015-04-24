@@ -5,7 +5,6 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
