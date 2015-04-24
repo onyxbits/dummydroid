@@ -11,7 +11,6 @@ import com.akdeniz.googleplaycrawler.GooglePlay.AndroidCheckinResponse;
 import com.akdeniz.googleplaycrawler.GooglePlay.ResponseWrapper;
 import com.akdeniz.googleplaycrawler.GooglePlay.UploadDeviceConfigRequest;
 import com.akdeniz.googleplaycrawler.GooglePlayAPI;
-import com.akdeniz.googleplaycrawler.Utils;
 
 /**
  * A swingworker for uploading the checkinrequest to Play and getting a GSF ID.
@@ -33,8 +32,9 @@ class CheckinWorker extends SwingWorker<String, Object> {
 	protected String doInBackground() throws Exception {
 		GooglePlayAPI api = new GooglePlayAPI(formData.getUsername(), formData.getPassword());
 		// this first checkin is for generating android-id
-		AndroidCheckinResponse checkinResponse = api.postCheckin(Utils.generateAndroidCheckinRequest()
-				.toByteArray());
+		byte[] buf = AndroidCheckinRequest.newBuilder(formData
+				.getAndroidCheckinRequestBuilder().build()).build().toByteArray();
+		AndroidCheckinResponse checkinResponse = api.postCheckin(buf);
 		api.setAndroidID(BigInteger.valueOf(checkinResponse.getAndroidId()).toString(16));
 		api.setSecurityToken((BigInteger.valueOf(checkinResponse.getSecurityToken()).toString(16)));
 
