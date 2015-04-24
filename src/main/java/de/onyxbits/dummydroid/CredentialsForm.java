@@ -3,6 +3,8 @@ package de.onyxbits.dummydroid;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -12,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
-public class CredentialsForm extends AbstractForm implements CaretListener {
+public class CredentialsForm extends AbstractForm implements CaretListener, ActionListener {
 
 	/**
 	 * 
@@ -54,6 +56,10 @@ public class CredentialsForm extends AbstractForm implements CaretListener {
 		username.addCaretListener(this);
 		password.removeCaretListener(this);
 		password.addCaretListener(this);
+		username.removeActionListener(this);
+		username.addActionListener(this);
+		password.removeActionListener(this);
+		password.addActionListener(this);
 		stopIfEmpty();
 	}
 
@@ -64,12 +70,21 @@ public class CredentialsForm extends AbstractForm implements CaretListener {
 	}
 
 	private void stopIfEmpty() {
-		forwardAction
-				.setEnabled(username.getText().length() > 0 && password.getPassword().length > 0);
+		forwardAction.setEnabled(username.getText().length() > 0 && password.getPassword().length > 0);
 	}
 
 	public void caretUpdate(CaretEvent arg0) {
 		stopIfEmpty();
+	}
+
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource().equals(username) && username.getText().length() > 0) {
+			password.requestFocus();
+		}
+		if (event.getSource().equals(password) && password.getPassword() != null
+				&& password.getPassword().length > 0) {
+			forwardAction.actionPerformed(null);
+		}
 	}
 
 }
