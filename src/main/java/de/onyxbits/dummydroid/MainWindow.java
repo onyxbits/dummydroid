@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -38,11 +39,12 @@ public class MainWindow extends JFrame implements Runnable {
 		description.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 		description.addHyperlinkListener(new BrowseUtil());
 		JPanel formContainer = new JPanel();
+		JLabel step = new JLabel();
 		formContainer.setLayout(new CardLayout());
 
-		NavigateAction forward = new NavigateAction(description, formContainer, NavigateAction.FORWARD,
+		NavigateAction forward = new NavigateAction(description, formContainer, step, NavigateAction.FORWARD,
 				formData);
-		NavigateAction backward = new NavigateAction(description, formContainer, NavigateAction.BACK,
+		NavigateAction backward = new NavigateAction(description, formContainer, step, NavigateAction.BACK,
 				formData);
 
 		formContainer.add(new LoadForm(forward, backward), LoadForm.class.getName());
@@ -59,9 +61,13 @@ public class MainWindow extends JFrame implements Runnable {
 		JButton next = new JButton(forward);
 		JButton previous = new JButton(backward);
 		JLabel content = new JLabel("");
-		JPanel buttonBar = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		buttonBar.add(previous);
-		buttonBar.add(next);
+		JPanel buttonBar = new JPanel(new BorderLayout());
+		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		buttons.add(previous);
+		buttons.add(next);
+		step.setBorder(BorderFactory.createEmptyBorder(0,15,0,0));
+		buttonBar.add(step,BorderLayout.WEST);
+		buttonBar.add(buttons,BorderLayout.EAST);
 		content.setLayout(new BorderLayout());
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 				new JScrollPane(description), formContainer);
