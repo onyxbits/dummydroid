@@ -156,7 +156,7 @@ public class GooglePlayAPI {
 		// this first checkin is for generating android-id
 		AndroidCheckinResponse checkinResponse = postCheckin(Utils.generateAndroidCheckinRequest()
 				.toByteArray());
-		this.setAndroidID(BigInteger.valueOf(checkinResponse.getAndroidId()).toString(16));
+		this.setAndroidID(BigInteger.valueOf(checkinResponse.getAndroidId()).toString(16).toUpperCase());
 		setSecurityToken((BigInteger.valueOf(checkinResponse.getSecurityToken()).toString(16)));
 
 		String c2dmAuth = loginAC2DM();
@@ -202,7 +202,7 @@ public class GooglePlayAPI {
 		String[][] data = new String[][] {
 				{ "app", application },
 				{ "sender", sender },
-				{ "device", new BigInteger(this.getAndroidID(), 16).toString() } };
+				{ "device", new BigInteger(this.getAndroidID(), 16).toString().toUpperCase() } };
 		HttpEntity responseEntity = executePost(C2DM_REGISTER_URL, data,
 				getHeaderParameters(c2dmAuth, null));
 		return Utils.parseResponse(new String(Utils.readAll(responseEntity.getContent())));

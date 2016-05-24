@@ -24,9 +24,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 /**
  * A swingworker for uploading the checkinrequest to Play and getting a GSF ID.
- * 
+ *
  * @author patrick
- * 
+ *
  */
 class CheckinWorker extends SwingWorker<String, Object> {
 
@@ -75,7 +75,7 @@ class CheckinWorker extends SwingWorker<String, Object> {
 		// this first checkin is for generating android-id
 		AndroidCheckinResponse checkinResponse = api.postCheckin(Utils.generateAndroidCheckinRequest()
 				.toByteArray());
-		api.setAndroidID(BigInteger.valueOf(checkinResponse.getAndroidId()).toString(16));
+		api.setAndroidID(BigInteger.valueOf(checkinResponse.getAndroidId()).toString(16).toUpperCase());
 		api.setSecurityToken((BigInteger.valueOf(checkinResponse.getSecurityToken()).toString(16)));
 
 		String c2dmAuth = api.loginAC2DM();
@@ -98,7 +98,7 @@ class CheckinWorker extends SwingWorker<String, Object> {
 				request.toByteArray(), "application/x-protobuf");
 		responseWrapper.getPayload().getUploadDeviceConfigResponse();
 
-		PrintWriter pw = new PrintWriter(new File(api.getAndroidID()+".txt"));
+		PrintWriter pw = new PrintWriter(new File(api.getAndroidID().toUpperCase()+".txt"));
 		pw.println(formData.assemble());
 		pw.close();
 		return api.getAndroidID();
