@@ -11,9 +11,9 @@ import com.akdeniz.googleplaycrawler.GooglePlay.DeviceConfigurationProto;
 
 /**
  * A datacapsule
- * 
+ *
  * @author patrick
- * 
+ *
  */
 public class FormData {
 
@@ -89,37 +89,34 @@ public class FormData {
 					.setScreenLayout(2)
 					.setHasHardKeyboard(false)
 					.setHasFiveWayNavigation(false)
-					.setScreenDensity(320)
-					.setScreenWidth(720)
-					.setScreenHeight(1184)
-					.setGlEsVersion(131072)
+					.setScreenDensity(560)
+					.setScreenWidth(1440)
+					.setScreenHeight(2560)
+					.setGlEsVersion(196609)
 					.addAllSystemSharedLibrary(
-							Arrays.asList("android.test.runner", "com.android.future.usb.accessory",
-									"com.android.location.provider", "com.android.nfc_extras",
-									"com.google.android.maps", "com.google.android.media.effects",
+							Arrays.asList("android.test.runner", "com.android.future.usb.accessory", "com.android.location.provider",
+									"com.android.media.remotedisplay", "com.android.mediadrm.signer", "com.android.nfc_extras", "com.google.android.camera.experimental2015",
+									"com.google.android.dialer.support", "com.google.android.maps", "com.google.android.media.effects",
 									"com.google.widevine.software.drm", "javax.obex"))
 					.addAllSystemAvailableFeature(
-							Arrays.asList("android.hardware.bluetooth", "android.hardware.camera",
-									"android.hardware.camera.autofocus", "android.hardware.camera.flash",
-									"android.hardware.camera.front", "android.hardware.faketouch",
-									"android.hardware.location", "android.hardware.location.gps",
-									"android.hardware.location.network", "android.hardware.microphone",
-									"android.hardware.nfc", "android.hardware.screen.landscape",
-									"android.hardware.screen.portrait", "android.hardware.sensor.accelerometer",
-									"android.hardware.sensor.barometer", "android.hardware.sensor.compass",
-									"android.hardware.sensor.gyroscope", "android.hardware.sensor.light",
-									"android.hardware.sensor.proximity", "android.hardware.telephony",
-									"android.hardware.telephony.gsm", "android.hardware.touchscreen",
-									"android.hardware.touchscreen.multitouch",
-									"android.hardware.touchscreen.multitouch.distinct",
-									"android.hardware.touchscreen.multitouch.jazzhand",
-									"android.hardware.usb.accessory", "android.hardware.usb.host",
-									"android.hardware.wifi", "android.hardware.wifi.direct",
-									"android.software.live_wallpaper", "android.software.sip",
-									"android.software.sip.voip", "com.cyanogenmod.android",
-									"com.cyanogenmod.nfc.enhanced", "com.google.android.feature.GOOGLE_BUILD",
-									"com.nxp.mifare", "com.tmobile.software.themes"))
-					.addAllNativePlatform(Arrays.asList("armeabi-v7a", "armeabi"))
+							Arrays.asList("android.hardware.audio.low_latency", "android.hardware.audio.output", "android.hardware.audio.pro", "android.hardware.microphone",
+									"android.hardware.output", "android.hardware.bluetooth", "android.hardware.bluetooth_le", "android.hardware.camera",
+									"android.hardware.camera.any", "android.hardware.camera.autofocus", "android.hardware.camera.flash", "android.hardware.camera.front",
+									"android.hardware.camera.level.full", "android.hardware.camera.capability.manual_sensor", "android.hardware.camera.capability.manual_post_processing", "android.hardware.camera.capability.raw",
+									"android.hardware.consumerir", "android.hardware.ethernet", "android.hardware.fingerprint", "android.hardware.location",
+									"android.hardware.location.network", "android.hardware.location.gps", "android.hardware.microphone", "android.hardware.nfc",
+									"android.hardware.nfc.hce", "android.hardware.sensor.accelerometer", "android.hardware.sensor.barometer", "android.hardware.sensor.compass",
+									"android.hardware.sensor.gyroscope", "android.hardware.sensor.hifi_sensors", "android.hardware.sensor.light", "android.hardware.sensor.proximity",
+									"android.hardware.sensor.stepcounter", "android.hardware.sensor.stepdetector", "android.hardware.screen.landscape", "android.hardware.screen.portrait",
+									"android.hardware.telephony", "android.hardware.telephony.cdma", "android.hardware.telephony.gsm", "android.hardware.faketouch",
+									"android.hardware.usb.host", "android.hardware.usb.accessory", "android.hardware.wifi", "android.hardware.wifi.direct",
+									"android.hardware.touchscreen", "android.hardware.touchscreen.multitouch", "android.hardware.touchscreen.multitouch.distinct", "android.hardware.touchscreen.multitouch.jazzhand",
+									"android.software.app_widgets", "android.software.backup", "android.software.connectionservice", "android.software.device_admin",
+									"android.software.home_screen", "android.software.input_methods", "android.software.live_wallpaper", "android.software.managed_users",
+									"android.software.midi", "android.software.print", "android.software.sip", "android.software.sip.voip",
+									"android.software.verified_boot", "android.software.voice_recognizers", "android.software.webview", "com.google.android.feature.GOOGLE_BUILD",
+									"com.google.android.feature.GOOGLE_EXPERIENCE", "com.google.android.feature.EXCHANGE_6_2", "com.nxp.mifare"))
+					.addAllNativePlatform(Arrays.asList("x86_64", "x86", "arm64-v8a", "armeabi-v7a", "armeabi"))
 					.addAllSystemSupportedLocale(
 							Arrays.asList("af", "af_ZA", "am", "am_ET", "ar", "ar_EG", "bg", "bg_BG", "ca",
 									"ca_ES", "cs", "cs_CZ", "da", "da_DK", "de", "de_AT", "de_CH", "de_DE", "de_LI",
