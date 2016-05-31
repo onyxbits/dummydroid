@@ -188,7 +188,7 @@ public class GooglePlayAPI {
 						{ "device_country", "us" },
 						{ "device_country", "us" },
 						{ "lang", "en" },
-						{ "sdk_version", "21" }, }, null);
+						{ "sdk_version", "17" }, }, null);
 
 		Map<String, String> c2dmAuth = Utils.parseResponse(new String(Utils.readAll(c2dmResponseEntity
 				.getContent())));
@@ -234,7 +234,7 @@ public class GooglePlayAPI {
 				{ "app", "com.android.vending" },
 				{ "device_country", "en" },
 				{ "lang", "en" },
-				{ "sdk_version", "21" }, }, null);
+				{ "sdk_version", "17" }, }, null);
 
 		Map<String, String> response = Utils.parseResponse(new String(Utils.readAll(responseEntity
 				.getContent())));
@@ -600,7 +600,7 @@ public class GooglePlayAPI {
 				{ "X-DFE-Client-Id", "am-android-google" },
 				{
 						"User-Agent",
-						"Android-Finsky/6.7.07.E (api=3,versionCode=80670700,sdk=23,device=angler,hardware=angler,product=angler,build=MTC19T:user)" },
+						"Android-Finsky/6.7.07.E (versionCode=80670700,sdk=23,device=angler,hardware=angler,product=angler,build=MTC19T:user)" },
 				{ "X-DFE-SmallestScreenWidthDp", "320" },
 				{ "X-DFE-Filter-Level", "3" },
 				{ "Host", "android.clients.google.com" },

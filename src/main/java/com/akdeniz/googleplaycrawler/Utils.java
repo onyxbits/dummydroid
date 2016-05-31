@@ -176,7 +176,7 @@ public class Utils {
 						.setProduct("angler").setCarrier("Google").setRadio("angler-03.61")
 						.setBootloader("angler-03.51").setClient("android-google")
 						.setTimestamp(new Date().getTime() / 1000).setGoogleServices(16).setDevice("angler")
-						.setSdkVersion(23).setModel("angler").setManufacturer("Samsung")
+						.setSdkVersion(23).setModel("angler").setManufacturer("Huawei")
 						.setBuildProduct("angler").setOtaInstalled(false)).setLastCheckinMsec(0)
 				.setCellOperator("310260").setSimOperator("310260").setRoaming("mobile-notroaming")
 				.setUserNumber(0)).setLocale("en_US").setTimeZone("Europe/Amsterdam").setVersion(3)
