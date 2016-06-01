@@ -181,11 +181,11 @@ public class GooglePlayAPI {
 						{ "Email", this.getEmail() },
 						{ "Passwd", this.password },
 						{ "service", "ac2dm" },
+						{ "add_account", "1"},
 						{ "accountType", ACCOUNT_TYPE_HOSTED_OR_GOOGLE },
 						{ "has_permission", "1" },
 						{ "source", "android" },
 						{ "app", "com.google.android.gsf" },
-						{ "device_country", "us" },
 						{ "device_country", "us" },
 						{ "lang", "en" },
 						{ "sdk_version", "17" }, }, null);
@@ -232,7 +232,7 @@ public class GooglePlayAPI {
 				{ "source", "android" },
 				{ "androidId", this.getAndroidID() },
 				{ "app", "com.android.vending" },
-				{ "device_country", "en" },
+				{ "device_country", "us" },
 				{ "lang", "en" },
 				{ "sdk_version", "17" }, }, null);
 
