@@ -45,16 +45,16 @@ import com.akdeniz.googleplaycrawler.GooglePlay.UploadDeviceConfigResponse;
  * <code>checkin, search, details, bulkDetails, browse, list and download</code>
  * capabilities. It uses <code>Apache Commons HttpClient</code> for POST and GET
  * requests.
- * 
+ *
  * <p>
  * <b>XXX : DO NOT call checkin, login and download consecutively. To allow
  * server to catch up, sleep for a while before download! (5 sec will do!) Also
  * it is recommended to call checkin once and use generated android-id for
  * further operations.</b>
  * </p>
- * 
+ *
  * @author akdeniz
- * 
+ *
  */
 public class GooglePlayAPI {
 
@@ -131,7 +131,7 @@ public class GooglePlayAPI {
 
 	/**
 	 * Connection manager to allow concurrent connections.
-	 * 
+	 *
 	 * @return {@link ClientConnectionManager} instance
 	 */
 	public static ClientConnectionManager getConnectionManager() {
@@ -145,18 +145,18 @@ public class GooglePlayAPI {
 	/**
 	 * Performs authentication on "ac2dm" service and match up android id,
 	 * security token and email by checking them in on this server.
-	 * 
+	 *
 	 * This function sets check-inded android ID and that can be taken either by
 	 * using <code>getToken()</code> or from returned
 	 * {@link AndroidCheckinResponse} instance.
-	 * 
+	 *
 	 */
 	public AndroidCheckinResponse checkin() throws Exception {
 
 		// this first checkin is for generating android-id
 		AndroidCheckinResponse checkinResponse = postCheckin(Utils.generateAndroidCheckinRequest()
 				.toByteArray());
-		this.setAndroidID(BigInteger.valueOf(checkinResponse.getAndroidId()).toString(16));
+		this.setAndroidID(BigInteger.valueOf(checkinResponse.getAndroidId()).toString(16).toUpperCase());
 		setSecurityToken((BigInteger.valueOf(checkinResponse.getSecurityToken()).toString(16)));
 
 		String c2dmAuth = loginAC2DM();
@@ -181,14 +181,14 @@ public class GooglePlayAPI {
 						{ "Email", this.getEmail() },
 						{ "Passwd", this.password },
 						{ "service", "ac2dm" },
+						{ "add_account", "1"},
 						{ "accountType", ACCOUNT_TYPE_HOSTED_OR_GOOGLE },
 						{ "has_permission", "1" },
 						{ "source", "android" },
 						{ "app", "com.google.android.gsf" },
 						{ "device_country", "us" },
-						{ "device_country", "us" },
 						{ "lang", "en" },
-						{ "sdk_version", "21" }, }, null);
+						{ "sdk_version", "17" }, }, null);
 
 		Map<String, String> c2dmAuth = Utils.parseResponse(new String(Utils.readAll(c2dmResponseEntity
 				.getContent())));
@@ -202,7 +202,7 @@ public class GooglePlayAPI {
 		String[][] data = new String[][] {
 				{ "app", application },
 				{ "sender", sender },
-				{ "device", new BigInteger(this.getAndroidID(), 16).toString() } };
+				{ "device", new BigInteger(this.getAndroidID(), 16).toString().toUpperCase() } };
 		HttpEntity responseEntity = executePost(C2DM_REGISTER_URL, data,
 				getHeaderParameters(c2dmAuth, null));
 		return Utils.parseResponse(new String(Utils.readAll(responseEntity.getContent())));
@@ -232,9 +232,9 @@ public class GooglePlayAPI {
 				{ "source", "android" },
 				{ "androidId", this.getAndroidID() },
 				{ "app", "com.android.vending" },
-				{ "device_country", "en" },
+				{ "device_country", "us" },
 				{ "lang", "en" },
-				{ "sdk_version", "21" }, }, null);
+				{ "sdk_version", "17" }, }, null);
 
 		Map<String, String> response = Utils.parseResponse(new String(Utils.readAll(responseEntity
 				.getContent())));
@@ -322,7 +322,7 @@ public class GooglePlayAPI {
 	 * Fetches applications within supplied category and sub-category. If
 	 * <code>null</code> is given for sub-category, it fetches sub-categories of
 	 * passed category.
-	 * 
+	 *
 	 * Default values for offset and numberOfResult are "0" and "20" respectively.
 	 * These values are determined by Google Play Store.
 	 */
@@ -400,7 +400,7 @@ public class GooglePlayAPI {
 				{ "Cookie", cookie },
 				{
 						"User-Agent",
-						"AndroidDownloadManager/4.1.1 (Linux; U; Android 4.1.1; Nexus S Build/JRO03E)" }, };
+						"AndroidDownloadManager/6.0.1 (Linux; U; Android 6.0.1; Nexus 6P Build/MTC19T)" }, };
 
 		HttpEntity httpEntity = executeGet(url, null, headerParams);
 		return httpEntity.getContent();
@@ -408,7 +408,7 @@ public class GooglePlayAPI {
 
 	/**
 	 * Fetches the reviews of given package name by sorting passed choice.
-	 * 
+	 *
 	 * Default values for offset and numberOfResult are "0" and "20" respectively.
 	 * These values are determined by Google Play Store.
 	 */
@@ -426,7 +426,7 @@ public class GooglePlayAPI {
 	/**
 	 * Uploads device configuration to google server so that can be seen from web
 	 * as a registered device!!
-	 * 
+	 *
 	 * @see https://play.google.com/store/account
 	 */
 	public UploadDeviceConfigResponse uploadDeviceConfig() throws Exception {
@@ -440,7 +440,7 @@ public class GooglePlayAPI {
 
 	/**
 	 * Fetches the recommendations of given package name.
-	 * 
+	 *
 	 * Default values for offset and numberOfResult are "0" and "20" respectively.
 	 * These values are determined by Google Play Store.
 	 */
@@ -461,7 +461,7 @@ public class GooglePlayAPI {
 	/**
 	 * Executes GET request and returns result as {@link ResponseWrapper}.
 	 * Standard header parameters will be used for request.
-	 * 
+	 *
 	 * @see getHeaderParameters
 	 * */
 	private ResponseWrapper executeGETRequest(String path, String[][] datapost) throws IOException {
@@ -474,7 +474,7 @@ public class GooglePlayAPI {
 	/**
 	 * Executes POST request and returns result as {@link ResponseWrapper}.
 	 * Standard header parameters will be used for request.
-	 * 
+	 *
 	 * @see getHeaderParameters
 	 * */
 	private ResponseWrapper executePOSTRequest(String path, String[][] datapost) throws IOException {
@@ -590,7 +590,7 @@ public class GooglePlayAPI {
 	private String[][] getHeaderParameters(String token, String contentType) {
 
 		return new String[][] {
-				{ "Accept-Language", getLocalization() != null ? getLocalization() : "en-EN" },
+				{ "Accept-Language", getLocalization() != null ? getLocalization() : "en_US" },
 				{ "Authorization", "GoogleLogin auth=" + token },
 				{ "X-DFE-Enabled-Experiments", "cl:billing.select_add_instrument_by_default" },
 				{
@@ -600,7 +600,7 @@ public class GooglePlayAPI {
 				{ "X-DFE-Client-Id", "am-android-google" },
 				{
 						"User-Agent",
-						"Android-Finsky/3.10.14 (api=3,versionCode=8016014,sdk=15,device=GT-I9300,hardware=aries,product=GT-I9300)" },
+						"Android-Finsky/6.7.07.E (versionCode=80670700,sdk=23,device=angler,hardware=angler,product=angler,build=MTC19T:user)" },
 				{ "X-DFE-SmallestScreenWidthDp", "320" },
 				{ "X-DFE-Filter-Level", "3" },
 				{ "Host", "android.clients.google.com" },
@@ -641,9 +641,9 @@ public class GooglePlayAPI {
 	/**
 	 * Sets {@link HttpClient} instance for internal usage of GooglePlayAPI. It is
 	 * important to note that this instance should allow concurrent connections.
-	 * 
+	 *
 	 * @see getConnectionManager
-	 * 
+	 *
 	 * @param client
 	 */
 	public void setClient(HttpClient client) {
@@ -670,7 +670,7 @@ public class GooglePlayAPI {
 	 * Note that changing this value has no affect on localized application list
 	 * that server provides. It depends on only your IP location.
 	 * <p>
-	 * 
+	 *
 	 * @param localization
 	 *          can be <b>en-EN, en-US, tr-TR, fr-FR ... (default : en-EN)</b>
 	 */
